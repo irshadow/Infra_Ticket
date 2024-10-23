@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>{{ formSchema.title }}</title>
+    </head>
+<body>
+    <form>
+        {% csrf_token %}
+        {% for item in formSchema.inputFields %}
+            <input {{ item }}>
+        {% endfor %}
+        {% for item in formSchema.action %}
+            <input {{ item }} >
+        {% endfor %}
+    </form>
+    
+</body>
+</html>

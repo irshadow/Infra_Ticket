@@ -1,0 +1,22 @@
+{
+    "title": "Login",
+    "fields": [
+      {
+        "name":"username",
+        "text": "Username",
+        "type":"text"
+      },
+      {
+        "name":"password",
+        "text": "Password",
+        "type":"password"
+      }
+    ],
+    "action":{
+      "name":"submit",
+      "value":"Login",
+      "type":"submit",
+      "formaction":"https://www.google.it",
+      "formmethod":"post"
+    }
+}
