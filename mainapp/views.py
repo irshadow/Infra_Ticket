@@ -5,10 +5,10 @@ from .custome_temp import custome_template_maker
 
 
 
-def home(request):
+def homeView(request):
     return render(request, 'mainapp/home.html')
 
-def login(request):
+def loginView(request):
     jsonData = open('mainapp\private\json\login.json')
     formSchema = json.load(jsonData)
     

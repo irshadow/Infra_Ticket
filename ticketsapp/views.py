@@ -2,7 +2,7 @@ from django.shortcuts import render
 from mainapp.custome_temp import custome_template_maker
 import json
 
-def ticket(request):
+def ticketView(request):
     jsonData = open('mainapp\private\json\issueTicket.json')
     formSchema = json.load(jsonData)
 
