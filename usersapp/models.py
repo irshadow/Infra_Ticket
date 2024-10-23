@@ -22,6 +22,10 @@ class User(models.Model):
     pword = models.CharField(null=False, blank=False, max_length=50)
     role = models.ForeignKey(Role, on_delete=models.CASCADE)
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    lastlogin = models.DateTimeField(null=False, blank=False)
+    ip = models.IPAddressField(null=False, blank=False)
+    isblock = models.BooleanField(null=False, blank=False,default=False)
+
 
     def __str__(self):
         return '{}  {} - {}({})'.format(self.fname, self.lname, self.role, self.department)

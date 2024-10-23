@@ -2,9 +2,10 @@
     "title": "Login",
     "fields": [
       {
-        "name":"username",
-        "text": "Username",
-        "type":"text"
+        "name":"emailaddress",
+        "text": "emailaddress",
+        "placeholder": "Email Address",
+        "type":"email"
       },
       {
         "name":"password",
