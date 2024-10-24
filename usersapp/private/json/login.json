@@ -1,0 +1,29 @@
+{
+    "title": "Login",
+    "fields": [
+      {
+        "name":"emailaddress",
+        "text": "emailaddress",
+        "placeholder": "Email@example.com",
+        "type":"email",
+        "class":"form-control",
+        "id":"floatingInput"
+      },
+      {
+        "name":"password",
+        "text": "Password",
+        "type":"password",
+        "placeholder":"Password",
+        "class":"form-control",
+        "id":"floatingPassword"
+      }
+    ],
+    "action":{
+      "name":"submit",
+      "value":"Login",
+      "type":"submit",
+      "formaction":"login/",
+      "formmethod":"post",
+      "class":"btn btn-primary w-100 py-2"
+    }
+}

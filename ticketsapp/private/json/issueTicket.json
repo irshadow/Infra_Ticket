@@ -1,0 +1,43 @@
+{
+  "title": "Issue Ticket",
+  "fields": [
+    {
+      "name":"issuer",
+      "text": "issuer name",
+      "type":"text"
+    },
+    {
+      "name":"title",
+      "text": "title",
+      "type":"text"
+    },
+    {
+      "name":"description",
+      "text": "description",
+      "type":"text",
+      "maxlength":"50"
+    },
+    {
+      "name":"todepartment",
+      "text": "department",
+      "type":"text"
+    },
+    {
+      "name":"solver",
+      "text": "solver",
+      "type":"text"
+    },
+    {
+      "name":"status",
+      "text": "status",
+      "type":"text"
+    }
+  ],
+  "action":{
+    "name":"submit",
+    "value":"Submit",
+    "type":"submit",
+    "formaction":"issue/",
+    "formmethod":"post"
+  }
+}

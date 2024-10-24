@@ -23,7 +23,7 @@ class User(models.Model):
     role = models.ForeignKey(Role, on_delete=models.CASCADE)
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
     lastlogin = models.DateTimeField(null=False, blank=False)
-    ip = models.IPAddressField(null=False, blank=False)
+    ip = models.GenericIPAddressField(null=False, blank=False)
     isblock = models.BooleanField(null=False, blank=False,default=False)
 
 

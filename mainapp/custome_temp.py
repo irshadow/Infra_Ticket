@@ -16,7 +16,7 @@ def custome_template_maker(input_dict):
     dictInputTags.update({'inputFields':lstField})
     
     
-    act = ' '
+    act = ''
     counter=1
     for attribute, value in input_dict['action'].items():
         if attribute.lower() == 'url':
@@ -25,10 +25,11 @@ def custome_template_maker(input_dict):
             attribute = 'formmethod'
         if attribute.lower() == 'text':
             attribute = 'value'
-        act += attribute + " = " + value + ""
+        print(f'value ==== {value}')
+        act += attribute + ' = ' + value + ''
         if counter != len(input_dict['action']):
             counter += 1
-            act += " "
+            act += ' '
     act += ' '
 
     print("\n\n\n\n\n")
