@@ -2,10 +2,10 @@
     "title": "Login",
     "fields": [
       {
-        "name":"emailaddress",
-        "text": "emailaddress",
-        "placeholder": "Email@example.com",
-        "type":"email",
+        "name":"username",
+        "text": "UserName",
+        "placeholder": "User name",
+        "type":"text",
         "class":"form-control",
         "id":"floatingInput"
       },

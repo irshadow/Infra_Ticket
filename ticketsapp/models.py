@@ -1,39 +1,45 @@
 from django.db import models
-from usersapp.models import User,Department
-from servicesapp.models import Service
-
-class Priority(models.Model):
-    descripiton = models.CharField(null=False, blank=False, max_length=50)
-
-    def __str__(self):
-        return '{}'.format(self.descripiton)
+from usersapp.models import UserProfileModel
+from servicesapp.models import ServiceModel,DepartmentModel
     
-class Status(models.Model):
-    description = models.CharField(null=False, blank=False, max_length=50)
-
-    def __str__(self):
-        return '{}'.format(self.description)
-    
-class Ticket(models.Model):
+class TicketModel(models.Model):
     issuer = models.CharField(null=False, blank=False, max_length=60)
-    title = models.ForeignKey(Service, on_delete=models.PROTECT)
+    todepartment = models.ForeignKey(DepartmentModel, on_delete=models.PROTECT)
+    title = models.ForeignKey(ServiceModel, on_delete=models.PROTECT)
     description = models.TextField(null=False, blank=False, max_length=200)
-    todepartment = models.ForeignKey(Department, on_delete=models.PROTECT)
-    solver = models.ForeignKey(User, on_delete=models.PROTECT)
-    status =models.ForeignKey(Status, on_delete=models.PROTECT)
+    
+    immediately = 1
+    high = 2
+    medium = 3
+    low = 4
+    priority_choices = ((immediately, "Immediately"),
+                        (high, "High"),
+                        (medium, "Medium"),
+                        (low, "Low"))
+    priority = models.IntegerField(choices=priority_choices, null=False, blank=False)
+    solver = models.ForeignKey(UserProfileModel,null=True, blank=True, on_delete=models.PROTECT)
+    
+    pending = 1
+    assigned = 2
+    canceled = 3
+    finished = 4
+    status_choices = ((pending, "Pending"),
+                      ((assigned, "Assigned")),
+                      (canceled, "Canceled"),
+                      (finished, "Finished"))
+    status =models.IntegerField(choices= status_choices,null=True,blank=True)
     issuetime = models.DateTimeField(auto_now_add=True)
-    dispatchtime = models.DateTimeField(blank=True)
+    dispatchtime = models.DateTimeField(null=True, blank=True)
     closetime = models.DateTimeField(null=True, blank=False)
-
 
     def __str__(self):
         return '{} - {} - ({})'.format(self.issuer, self.service, self.status)
     
-class Comment(models.Model):
+class CommentModel(models.Model):
     description = models.TextField(blank=True,max_length=200)
     dateofcomment = models.DateTimeField(auto_now_add=True)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
+    owner = models.ForeignKey(UserProfileModel, on_delete=models.PROTECT)
+    ticket = models.ForeignKey(TicketModel, on_delete=models.CASCADE)
 
     def __str__(self):
         return '{} - Date: {}'.format(self.owner, self.dateofcomment)

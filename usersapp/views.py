@@ -1,71 +1,37 @@
 from django.shortcuts import render
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from django.http import HttpResponseRedirect
-import ticketsapp
+from mainapp.views import homeView
 from django.urls import reverse
 import json
-from mainapp.custome_temp import custome_template_maker
-import ticketsapp.views
 
 def index(request):
-
-
-
+    #Read the local login.json file which conaints login form's schema
     rawData = open('usersapp/private/json/login.json')
     rawData = json.load(rawData)
-
-    return render(request, 'usersapp/login.html', {'rawData': rawData})
-
-
-
-
-
-
-
-
-
-    # if request.user.is_authenticated and request.user.is_active:
-    #     return HttpResponseRedirect(reverse(ticketsapp.views.ticketIssueView))
-    # else:
-    #     jsonData = open('usersapp\private\json\login.json')
-    #     formSchema = json.load(jsonData)
-    #     return render(request, 'usersapp/login.html', {'formSchema':custome_template_maker(formSchema)})
-
+    #Render login form 
+    return render(request, 'usersapp/login.html', {'rawData': rawData}) #We passed json schema to the login.html
 
 def doLogin(request):
-
-
-
-
-
-
-
-
-
-
-
-
+    #Request will process if user sent login data to this view by POST method 
     if request.method == 'POST':
-        emailAddress = request.POST.get('emailaddress')
-        password = request.POST.get('password')
-
-        user = authenticate(request, email= emailAddress, pword= password)
-        if user is not None:
+        username = request.POST.get('username')
+        pword = request.POST.get('password')
+        user = authenticate(request, username= username, password= pword)
+        if user is not None: #If user exists in the database do login
             login(request, user)
-            return HttpResponseRedirect(reversed(request,ticketsapp.views.ticketView))
+            return HttpResponseRedirect(reverse(homeView))
         else:
-            # jsonData = open('usersapp\private\json\login.json')
-            # formSchema = json.load(jsonData)
-
-            # formSchema = custome_template_maker(formSchema)
-            # formSchema.update({'loginFailed': 'invalid username or password'})
-            # print(formSchema)
-            # return render(request, 'usersapp/login.html', {'formSchema': formSchema})
-            return HttpResponseRedirect(reverse(index))
-        
+            #Read the local login.json file which conaints login form's schema
+            rawData = open('usersapp/private/json/login.json')
+            rawData = json.load(rawData)
+            #Render login form 
+            return render(request, 'usersapp/login.html', {'rawData': {'data':rawData, 'message':'Invalid username / password'}}) #We passed json schema to the login.html
     else:
-        # jsonData = open('usersapp\private\json\login.json')
-        # formSchema = json.load(jsonData)
-        # return render(request, 'usersapp/login.html', {'formSchema':custome_template_maker(formSchema)})
-        return HttpResponseRedirect(reverse(index))
+        return render(reverse(index))
+
+def logoutView(request):
+    logout(request)
+    return HttpResponseRedirect(reverse(homeView)) 
+
   

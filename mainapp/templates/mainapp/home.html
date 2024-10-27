@@ -2,92 +2,109 @@
 {% extends "mainapp/layout.html" %}
     
     {% block mainContent %}
-        <section class="hero" id="hero">
-            <div class="container-lg">
-            <div class="row align-items-center">
-                <div class="col-sm-6">
-                <h1 class="display-2 fw-bold">BPM mini-platform</h1>
-                <p>We assumed a company which needs a web application in order to issuing ticket to meet their infrastructures needs such as gaining access to a specific server/file server, client side problems, organization email, connecting to a third-party service, and ... . In this platform, employees can login and issue a ticket for a specific department. Then infrastructures' employee can receive their ticket to solve their problems. 
+        {% if user.authenticated %}
+            <section class="hero" id="hero">
+                <div class="container-lg">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                    <h1 class="display-2 fw-bold">BPM mini-platform</h1>
+                    <p>
+                        user's authenticated
+                    </p>
+                    <button class="btn btn-outline-dark btn-lg">Issue your Ticket</button>
+                    </div>
+                    <div class="col-sm-6 text-center">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2253/2253928.png" class="img-fluid" alt="">
+                    </div>
+                </div>
+                </div>
+            </section>
+        {% else %}
+            <section class="hero" id="hero">
+                <div class="container-lg">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                    <h1 class="display-2 fw-bold">BPM mini-platform</h1>
+                    <p>We assumed a company which needs a web application in order to issuing ticket to meet their infrastructures needs such as gaining access to a specific server/file server, client side problems, organization email, connecting to a third-party service, and ... . In this platform, employees can login and issue a ticket for a specific department. Then infrastructures' employee can receive their ticket to solve their problems. 
+                    </p>
+                    </div>
+                    <div class="col-sm-6 text-center">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2253/2253928.png" class="img-fluid" alt="">
+                    </div>
+                </div>
+                </div>
+            </section>
+            
+            <section class="services" id="services">
+                <div class="container">
+                <h2 class="display-5 fw-bold mb-4">Services</h2>
+                <div class="row">
+                    <div class="col-lg col-sm-6 mt-4">
+                    <div class="card">
+                        <i><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-microsoft" viewBox="0 0 16 16">
+                            <path d="M7.462 0H0v7.19h7.462zM16 0H8.538v7.19H16zM7.462 8.211H0V16h7.462zm8.538 0H8.538V16H16z"/>
+                        </svg></i>
+                        <div class="card-body">
+                        <h5 class="card-title fw-bold">MICROSOFT</h5>
+                        <p class="card-text">Includes MSSQL (DB Team), MS xchange server, and MS SystemCenter ...</p>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-lg col-sm-6 mt-4">
+                    <div class="card">
+                        <i><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-ethernet" viewBox="0 0 16 16">
+                            <path d="M14 13.5v-7a.5.5 0 0 0-.5-.5H12V4.5a.5.5 0 0 0-.5-.5h-1v-.5A.5.5 0 0 0 10 3H6a.5.5 0 0 0-.5.5V4h-1a.5.5 0 0 0-.5.5V6H2.5a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5M3.75 11h.5a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25m2 0h.5a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25m1.75.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zM9.75 11h.5a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25m1.75.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25z"/>
+                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 2a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z"/>
+                        </svg></i>
+                        <div class="card-body">
+                        <h5 class="card-title fw-bold">NETWORK</h5>
+                        <p class="card-text">Includes LAN Team, WAN Team, Network Security Team, And Data Center Team ...</p>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-lg col-sm-6 m-auto mt-4">
+                    <div class="card">
+                        <i><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-tools" viewBox="0 0 16 16">
+                            <path d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3q0-.405-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708M3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026z"/>
+                        </svg></i>
+                        <div class="card-body">
+                        <h5 class="card-title fw-bold">PASSIVE</h5>
+                        <p class="card-text">Which inludes different teams in order to meet the passive needs and ...</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </section>
+            
+            <section class="about" id="about">
+                <div class="container">
+                <h2 class="display-5 fw-bold mb-4">About Me</h2>
+                <p>My name is Ali Khanmohammadi, who is a master student of Engineering Technology for Strategy (and Security)
+                    at University of Genova.
                 </p>
-                <button class="btn btn-outline-dark btn-lg">Projects</button>
+                <p>And I appreciate dear Proffesor for this upportunity.</p>
                 </div>
-                <div class="col-sm-6 text-center">
-                <img src="https://cdn-icons-png.flaticon.com/512/2253/2253928.png" class="img-fluid" alt="">
-                </div>
-            </div>
-            </div>
-        </section>
-        
-        <section class="services" id="services">
-            <div class="container">
-            <h2 class="display-5 fw-bold mb-4">Services</h2>
-            <div class="row">
-                <div class="col-lg col-sm-6 mt-4">
-                <div class="card">
-                    <i><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-microsoft" viewBox="0 0 16 16">
-                        <path d="M7.462 0H0v7.19h7.462zM16 0H8.538v7.19H16zM7.462 8.211H0V16h7.462zm8.538 0H8.538V16H16z"/>
-                      </svg></i>
-                    <div class="card-body">
-                    <h5 class="card-title fw-bold">MICROSOFT</h5>
-                    <p class="card-text">Includes MSSQL (DB Team), MS xchange server, and MS SystemCenter ...</p>
+            </section>
+            
+            <section class="contact" id="contact">
+                <div class="container">
+                <h2 class="display-5 fw-bold mb-4">Contact Me</h2>
+                <div class="row">
+                    <div class="col-sm-4 mt-4">
+                    <a href="#"><i class="bi bi-envelope-fill"></i> ali.khanmohamadi@gmail.com</a>
+                    </div>
+                    <div class="col-sm-4 mt-4">
+                    <div class="social-media">
+                        <a href="#"><i class="bi-github"></i></a>
+                    </div>
+                    </div>
+                    <div class="col-sm-4 mt-4">
+                    <a href="#"><i class="bi bi-telephone-fill"></i> (+39)366-547-8111</a>
                     </div>
                 </div>
                 </div>
-                <div class="col-lg col-sm-6 mt-4">
-                <div class="card">
-                    <i><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-ethernet" viewBox="0 0 16 16">
-                        <path d="M14 13.5v-7a.5.5 0 0 0-.5-.5H12V4.5a.5.5 0 0 0-.5-.5h-1v-.5A.5.5 0 0 0 10 3H6a.5.5 0 0 0-.5.5V4h-1a.5.5 0 0 0-.5.5V6H2.5a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5M3.75 11h.5a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25m2 0h.5a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25m1.75.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zM9.75 11h.5a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25m1.75.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25z"/>
-                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 2a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z"/>
-                      </svg></i>
-                    <div class="card-body">
-                    <h5 class="card-title fw-bold">NETWORK</h5>
-                    <p class="card-text">Includes LAN Team, WAN Team, Network Security Team, And Data Center Team ...</p>
-                    </div>
-                </div>
-                </div>
-                <div class="col-lg col-sm-6 m-auto mt-4">
-                <div class="card">
-                    <i><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-tools" viewBox="0 0 16 16">
-                        <path d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3q0-.405-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708M3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026z"/>
-                      </svg></i>
-                    <div class="card-body">
-                    <h5 class="card-title fw-bold">PASSIVE</h5>
-                    <p class="card-text">Which inludes different teams in order to meet the passive needs and ...</p>
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div>
-        </section>
-        
-        <section class="about" id="about">
-            <div class="container">
-            <h2 class="display-5 fw-bold mb-4">About Me</h2>
-            <p>My name is Ali Khanmohammadi, who is a master student of Engineering Technology for Strategy (and Security)
-                at University of Genova.
-            </p>
-            <p>And I appreciate dear Proffesor for this upportunity.</p>
-            </div>
-        </section>
-        
-        
-        
-        <section class="contact" id="contact">
-            <div class="container">
-            <h2 class="display-5 fw-bold mb-4">Contact Me</h2>
-            <div class="row">
-                <div class="col-sm-4 mt-4">
-                <a href="#"><i class="bi bi-envelope-fill"></i> ali.khanmohamadi@gmail.com</a>
-                </div>
-                <div class="col-sm-4 mt-4">
-                <div class="social-media">
-                    <a href="#"><i class="bi-github"></i></a>
-                </div>
-                </div>
-                <div class="col-sm-4 mt-4">
-                <a href="#"><i class="bi bi-telephone-fill"></i> (+39)366-547-8111</a>
-                </div>
-            </div>
-            </div>
-        </section>
+            </section>
+        {% endif %}
+
     {% endblock %}
