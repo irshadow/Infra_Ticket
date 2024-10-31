@@ -1,0 +1,80 @@
+{% extends "mainapp/layout.html" %}
+
+{% block mainContent %}
+    <section class="hero" id="hero">
+        <div class="container-lg">
+        <div class="row align-items-center">
+            <h1 class="display-2 fw-bold">Tickets block</h1>
+
+            {% if not tickets %}
+                <h5>There is no ticket</h5>
+
+            {% else  %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Issuer</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Priority</th>
+                            <th scope="col">Issued Time</th>
+                            <th scope="col">Assigned on</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+
+                    {% for ct in tickets %}
+                        <tr>
+                            <th scope="row">{{ ct.issuer }}</th>
+                                <td>{{ ct.title }}</td>
+                                <td>{{ ct.get_priority_display }}</td>
+                                <td>{{ ct.issuetime }}</td>
+                                <td>{{ ct.dispatchtime }}</td>
+                                <td>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{ ct.id }}">
+                                        Close
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="staticBackdrop-{{ ct.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Close/Cancel Ticket No.{{ ct.id }}</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <form action="{% url "changeStatus" ct.id %}" method="POST" >
+
+                                                {% csrf_token %}
+
+                                                    <div class="modal-body">
+                                                        <input type="hidden" name = "{{ct.id}}">
+                                                        <select name="status" class="form-select" aria-label="change status">
+                                                            <option selected>Reason of changing</option>
+                                                            <option value=3>Cancel</option>
+                                                            <option value=4>Finished</option>
+                                                        </select>
+                                                        <label for="exampleFormControlTextarea1" class="form-label">Comment</label>
+                                                        <textarea name= "comment" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                        <button type="sunmit" class="btn btn-success">Done</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                    {% endfor %}    
+            {% endif %}        
+                    </tbody>
+                </table>
+            </div> 
+        </div>
+        </div>
+    </section>
+{% endblock mainContent %}
+

@@ -22,7 +22,8 @@ import usersapp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', homeView),
+    path('', homeView, name="homeView"),
     path('usersapp/',include('usersapp.urls')),
     path('ticketsapp/', include('ticketsapp.urls')),
+    path('mainapp/', include('mainapp.urls'))
 ]

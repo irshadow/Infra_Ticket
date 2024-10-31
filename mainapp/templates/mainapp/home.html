@@ -2,7 +2,7 @@
 {% extends "mainapp/layout.html" %}
     
     {% block mainContent %}
-        {% if user.authenticated %}
+        {% if user.is_authenticated %}
             <section class="hero" id="hero">
                 <div class="container-lg">
                 <div class="row align-items-center">
@@ -11,7 +11,7 @@
                     <p>
                         user's authenticated
                     </p>
-                    <button class="btn btn-outline-dark btn-lg">Issue your Ticket</button>
+                    <button class="btn btn-outline-dark btn-lg"><a href="ticketsapp/ticket">Issue your Ticket</a></button>
                     </div>
                     <div class="col-sm-6 text-center">
                     <img src="https://cdn-icons-png.flaticon.com/512/2253/2253928.png" class="img-fluid" alt="">
@@ -83,7 +83,7 @@
                 <p>My name is Ali Khanmohammadi, who is a master student of Engineering Technology for Strategy (and Security)
                     at University of Genova.
                 </p>
-                <p>And I appreciate dear Proffesor for this upportunity.</p>
+                <p>I am deeply grateful to Professor Cambiaso for providing this opportunity.</p>
                 </div>
             </section>
             

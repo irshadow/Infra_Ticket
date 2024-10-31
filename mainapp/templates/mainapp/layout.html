@@ -8,7 +8,7 @@
         <head>
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <title>BPM mini-Platform</title>
+            <title>{{ title }}</title>
             <meta name="description" content="">
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <link rel="stylesheet"  href='{% static "mainapp/css/bootstrap.css" %}'>
@@ -18,7 +18,9 @@
         </head>
         <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
             <div class="container-lg">
-              <a class="navbar-brand fw-bold" >BPM mini-platform</a>
+              {% if not user.is_authenticated %}<a class="navbar-brand" >BPM mini-platform</a>{% else %} <a class="navbar-brand" >{{ user.get_full_name }}</a> {% endif %}
+                
+
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -26,32 +28,41 @@
                 <ul class="navbar-nav mx-auto">
                   <li class="nav-item">
                     {% if user.is_authenticated %}
-                      <a class="nav-link active" aria-current="page" href="#hero">Ticket</a>
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href='{% url "homeView" %}'>Home</a>
+                    </li>
+                      <a class="nav-link active" aria-current="page" href='{% url "ticket" %}'>Ticket</a>
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href='{% url "dispatch" %}'>Dispatch</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href='{% url "exTickets" %}'>myTasks </a>
+                      </li>
                       
                     {% else %}
-                      <a class="nav-link active" aria-current="page" href="#hero">Home</a>
+                      <a class="nav-link active" aria-current="page" href='{% url "homeView" %}'>Home</a>
                     {% endif %}
                     
                   </li>
                   <li class="nav-item">
                     {% if user.is_authenticated %}
-                      <a class="nav-link active" aria-current="page" href="#hero">Upload JSON file</a>
+                      <a class="nav-link active" aria-current="page" href='{% url "uploadJson" %}'>Upload JSON file</a>
                     {% else %}
                       <a class="nav-link active" aria-current="page" href="#services">Services</a>
                     {% endif %}
                   </li>
                   <li class="nav-item">
                     {% if user.is_authenticated %}
-                      <a class="nav-link active" aria-current="page" href="#hero">My Tickets</a>
+                      <a class="nav-link active" aria-current="page" href="{% url "myTickets" %}">My Tickets</a>
                     {% else %}
                       <a class="nav-link active" aria-current="page" href="#about">About</a>
                     {% endif %}
                   </li>
                 </ul>
                 {% if user.is_authenticated %}
-                  <a class="btn btn-outline-dark d-none d-lg-block" href="usersapp/logout/">logout</a>
+                  <a class="btn btn-outline-dark d-none d-lg-block" href='{% url "logout" %}'>logout</a>
                 {% else %}
-                  <a class="btn btn-outline-dark d-none d-lg-block" href="usersapp/">Login</a>
+                  <a class="btn btn-outline-dark d-none d-lg-block" href='{% url "index" %}'>Login</a>
                 {% endif %}
               </div>
             </div>
@@ -60,6 +71,10 @@
           {% block mainContent %}
 
           {% endblock %}
+          
+          {% block dyForm %}
+            
+          {% endblock dyForm %}
           
           <footer class="text-center p-3 bg-body-tertiary">
             <div>&copy; ALI KHANMOHAMMADI, 2024. All Rights Reserved.</div>

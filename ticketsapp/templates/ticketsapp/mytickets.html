@@ -1,0 +1,46 @@
+{% extends "mainapp/layout.html" %}
+
+{% block mainContent %}
+    <section class="hero" id="hero">
+        <div class="container-lg">
+        <div class="row align-items-center">
+            <h1 class="display-2 fw-bold">Tickets block</h1>
+
+            {% if not tickets %}
+                <h5>There is no ticket</h5>
+
+            {% else  %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Solver</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Priority</th>
+                            <th scope="col">Issued Time</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Assigned on</th>
+                            <th scope="col">Close Time</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+
+                    {% for tikcet in tickets %}
+                        <tr>
+                            <th scope="row">{{ tikcet.solver }}</th>
+                                <td>{{ tikcet.title }}</td>
+                                <td>{{ tikcet.get_priority_display }}</td>
+                                <td>{{ tikcet.issuetime }}</td>
+                                <td>{{ tikcet.get_status_display }}</td>
+                                <td>{{ tikcet.dispatchtime }}</td>
+                                <td>{{ tikcet.closetime }}</td>
+                            </tr>
+                    {% endfor %}    
+            {% endif %}        
+                    </tbody>
+                </table>
+            </div> 
+        </div>
+        </div>
+    </section>
+{% endblock mainContent %}
+

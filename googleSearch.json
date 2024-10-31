@@ -1,0 +1,17 @@
+{
+    "title": "Google Search",
+    "fields": [
+      {
+        "name":"q",
+        "text": "search",
+        "type":"CharField"
+      }
+    ],
+    "action":{
+      "name":"submit",
+      "value":"Submit",
+      "type":"submit",
+      "formaction":"https://www.google.com/search",
+      "formmethod":"GET"
+    }
+  }

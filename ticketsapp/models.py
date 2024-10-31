@@ -33,7 +33,7 @@ class TicketModel(models.Model):
     closetime = models.DateTimeField(null=True, blank=False)
 
     def __str__(self):
-        return '{} - {} - ({})'.format(self.issuer, self.service, self.status)
+        return '{} - {} - ({})'.format(self.issuer, self.title, self.description, self.priority, self.issuetime, self.solver, self.status, self.dispatchtime, self.closetime)
     
 class CommentModel(models.Model):
     description = models.TextField(blank=True,max_length=200)
@@ -42,4 +42,4 @@ class CommentModel(models.Model):
     ticket = models.ForeignKey(TicketModel, on_delete=models.CASCADE)
 
     def __str__(self):
-        return '{} - Date: {}'.format(self.owner, self.dateofcomment)
+        return '({}) {} - Date: {}'.format(self.owner, self.description, self.dateofcomment)

@@ -1,0 +1,51 @@
+{% extends "mainapp/layout.html" %}
+
+{% block mainContent %}
+    <section class="hero" id="hero">
+        <div class="container-lg">
+        <div class="row align-items-center">
+            <h1 class="display-2 fw-bold">Upload JSON  File</h1>
+            <form  method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    {% csrf_token %}
+                    {{ jsonFUfrm.as_p }}
+                    <button type="submit" class="btn btn-dark">Upload</button>
+                </div>
+            </form>
+        </div>
+        </div>
+    </section>
+{% endblock mainContent %}
+
+{% block dyForm %}
+<section class="hero" id="hero">
+    <div class="container-lg">
+    <div class="row align-items-center">
+        
+{% if form %}
+        <form>
+            {% csrf_token %}
+            <h1 class="h3 mb-3 fw-normal">{{ data.title }}</h1>
+
+                <div class="form-floating">
+                    {{ form.as_p }}
+                </div>
+                <div class="form-floating">
+                    <input
+                    {% for attribute,value in action.items %}
+                        {{ attribute }}="{{value}}"
+                    {% endfor %}
+                    >
+                </div>
+                
+        </form>
+{% else %}
+<p>
+    YOUR FORM WILL BE RENDERED BELLOW
+</p>
+{% endif %}       
+    </div>
+    </div>
+</section>
+{% endblock dyForm %}
+

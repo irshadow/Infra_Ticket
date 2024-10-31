@@ -1,19 +1,20 @@
-<!DOCTYPE html>
-<html>
-    
-    <head>
-        <title>{{ formSchema.pageTitle }}</title>
-    </head>
-<body>
-    <form>
-        {% csrf_token %}
-        {% for item in formSchema.inputFields %}
-            <input {{ item }}>
-        {% endfor %}
-        {% for item in formSchema.action %}
-            <input {{ item }} >
-        {% endfor %}
-    </form>
-    
-</body>
-</html>
+{% extends "mainapp/layout.html" %}
+{% block mainContent %}
+    <section class="hero" id="hero">
+        <div class="container-lg">
+        <div class="row align-items-center">
+            <div class="col-sm-6">
+            <h5 class="display-7 fw-bold">Dear {{ user }} please fill the following form</h5>
+                
+                <form class = "form-control">
+                    {% csrf_token %}
+                        {{ form.as_p }}
+                    <input type="{{ action.type }}" name="{{ action.name }}" value="{{ action.value }}" formmethod="{{ action.formmethod}}" formaction="{{ action.formaction }}">
+                </form>
+                
+            </div>
+            <div class="col-sm-6 text-center">
+        </div>
+        </div>
+</section>
+{% endblock %}

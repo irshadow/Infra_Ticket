@@ -2,14 +2,22 @@
   "title": "Issue Ticket",
   "fields": [
     {
-      "name":"issuer",
-      "text": "issuer name",
-      "type":"text"
+      "name":"department",
+      "text": "department",
+      "type":"select",
+      "option":[
+        {"value":1,"text":"Microsoft"},
+        {"value":2,"text":"Network"},
+        {"value":3,"text":"Engineering"},
+        {"value":4,"text":"Help Desk"},
+        {"value":5,"text":"Servers"}
+      ]
     },
     {
       "name":"title",
       "text": "title",
-      "type":"text"
+      "type":"select",
+      "option":"db_base"
     },
     {
       "name":"description",
@@ -18,26 +26,22 @@
       "maxlength":"50"
     },
     {
-      "name":"todepartment",
-      "text": "department",
-      "type":"text"
-    },
-    {
-      "name":"solver",
-      "text": "solver",
-      "type":"text"
-    },
-    {
-      "name":"status",
-      "text": "status",
-      "type":"text"
+      "name":"priority",
+      "text": "priority",
+      "type":"select",
+      "option":[
+        {"value":1,"text":"Immediately"},
+        {"value":2,"text":"High"},
+        {"value":3,"text":"Medium"},
+        {"value":4,"text":"Low"}
+      ]
     }
   ],
   "action":{
     "name":"submit",
     "value":"Submit",
     "type":"submit",
-    "formaction":"issue/",
+    "formaction":"",
     "formmethod":"post"
   }
 }

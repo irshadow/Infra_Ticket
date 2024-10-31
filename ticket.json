@@ -1,0 +1,68 @@
+{
+    "title": "Issue Ticket",
+    "fields": [
+      {
+        "name":"department",
+        "text": "department",
+        "type":"ChoiceField",
+        "choices":[
+          [1,"Microsoft"],
+          [2,"Network"],
+          [3,"Engineering"],
+          [4,"Help Desk"],
+          [5,"Servers"]
+        ]
+      },
+      {
+        "name":"title",
+        "text": "title",
+        "type":"ChoiceField",
+        "choices":[
+          [1,"Active Directory services"],
+          [2,"Corporate Email"],
+          [3,"Skype services"],
+          [4,"MS security"],
+          [5,"Data Base Services"],
+          [6,"LAN services"],
+          [7,"WAN services"],
+          [8,"VoIP services"],
+          [9,"Data Center services"],
+          [10,"Internet services"],
+          [11,"Network Security"],
+          [12,"Storage services"],
+          [13,"Virtualization services"],
+          [14,"Physical Server"],
+          [15,"Install Software/Hardware"],
+          [16,"Windows problems"],
+          [17,"Hardware problems"],
+          [18,"Cabling services"],
+          [19,"Install Router/SW/Server ..."],
+          [20,"Port-Plan services"]
+      ]
+      },
+      {
+        "name":"description",
+        "text": "description",
+        "type":"text",
+        "maxlength":"50"
+      },
+      {
+        "name":"priority",
+        "text": "priority",
+        "type":"ChoiceField",
+        "choices":[
+          [1, "Immediately"],
+          [2, "High"],
+          [3, "Medium"],
+          [4, "Low"]
+        ]
+      }
+    ],
+    "action":{
+      "name":"submit",
+      "value":"Submit",
+      "type":"submit",
+      "formaction":"http://localhost:8000/ticketsapp/ticket/",
+      "formmethod":"post"
+    }
+  }

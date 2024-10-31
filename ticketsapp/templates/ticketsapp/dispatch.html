@@ -1,0 +1,168 @@
+{% extends "mainapp/layout.html" %}
+
+{% block mainContent %}
+    <section class="hero" id="hero">
+        <div class="container-lg">
+        <div class="row align-items-center">
+            <h1 class="display-2 fw-bold">Dispatching area</h1>
+            
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          Pending
+                        </button>
+                      </h2>
+                      <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Issuer</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Priority</th>
+                                    <th scope="col">Issued Time</th>
+                                    <th scope="col">Action </th>
+                                  </tr>
+                                </thead>
+                                    <tbody class="table-group-divider">
+                                        {% for pt in pending_tickets %}
+                                            <tr>
+                                                <th scope="row">{{ pt.issuer }}</th>
+                                                <td>{{ pt.title }}</td>
+                                                <td>{{ pt.get_priority_display }}
+                                                <td>{{ pt.issuetime }}</td>
+                                                <td>
+                                                  <!-- Button trigger modal -->
+                                                  <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{ pt.id }}">
+                                                    Assign to experts
+                                                  </button>
+
+                                                  <!-- Modal -->
+                                                  <div class="modal fade" id="staticBackdrop-{{ pt.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                      <div class="modal-content">
+                                                        <div class="modal-header">
+                                                          <h1 class="modal-title fs-5" id="staticBackdropLabel">To who you want to assign Ticket No.{{ pt.id }}</h1>
+                                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <form action="{% url "editTicket" pt.id %}" method="POST" >
+                                                          {% csrf_token %}
+                                                          <div class="modal-body">
+                                                              <input type="hidden" name = "{{pt.id}}">
+                                                              <select name="expert" class="form-select" aria-label="department users">
+                                                                <option selected>select an expert</option>
+                                                                {% for user in users %}
+                                                                {{user}}
+                                                                <option value={{ user.id }}>{{ user }}</option>
+                                                                {% endfor %}
+                                                              </select>
+
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                            <button type="sunmit" class="btn btn-success">Done</button>
+                                                          </div>
+                                                        </form>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                            </table>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          Processing
+                        </button>
+                      </h2>
+                      <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                        {% if assigned_tickets is None %}
+                            <h5>There is no ticket</h5>
+                        {% else  %}
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Issuer</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Priority</th>
+                                    <th scope="col">Issued Time</th>
+                                    <th scope="col">Solver</th>
+                                    <th scope="col">Assigned on</th>
+                                  </tr>
+                                </thead>
+                                    <tbody class="table-group-divider">
+                                            {% for at in assigned_tickets %}
+                                                <tr>
+                                                    <th scope="row">{{ at.issuer }}</th>
+                                                    <td>{{ at.title }}</td>
+                                                    <td>{{ at.get_priority_display }}</td>
+                                                    <td>{{ at.issuetime }}</td>
+                                                    <td>{{ at.solver }}</td>
+                                                    <td>{{ at.dispatchtime }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                    </tbody>
+                            </table>
+                        {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          Closed
+                        </button>
+                      </h2>
+                      <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                        {% if not canceled_tickets %}
+                            <h5>There is no ticket</h5>
+                        {% else  %}
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Issuer</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Priority</th>
+                                    <th scope="col">Issued Time</th>
+                                    <th scope="col">Solver</th>
+                                    <th scope="col">Assigned on</th>
+                                    <th scope="col">Closed on</th>
+                                  </tr>
+                                </thead>
+                                    <tbody class="table-group-divider">
+                                      
+                                            {% for ct in canceled_tickets %}
+                                                <tr>
+                                                    <th scope="row">{{ ct.issuer }}</th>
+                                                    <td>{{ ct.title }}</td>
+
+                                                    <td>{{ ct.get_priority_display }}</td>
+                                                    <td>{{ ct.issuetime }}</td>
+                                                    <td>{{ ct.solver }}</td>
+                                                    <td>{{ ct.dispatchtime }}</td>
+                                                    <td>{{ ct.closetime }}</td>
+                                                </tr>
+                                            {% endfor %}    
+                        {% endif %}        
+                                    </tbody>
+                            </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+            </div> 
+        </div>
+        </div>
+    </section>
+{% endblock mainContent %}
+
