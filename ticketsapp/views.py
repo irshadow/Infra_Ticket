@@ -79,7 +79,7 @@ def dispatchView(request):
 @login_required
 def ticketIssueView(request):
         #Read a local .json schema in order to parsing
-        jsonData = open('ticketsapp\private\json\issueTicket.json')
+        jsonData = open('ticketsapp/private/json/issueTicket.json')
         formSchema = json.load(jsonData) #load json data
         rawForm = frmBuilder(formSchema) #pass the data to form class
 
